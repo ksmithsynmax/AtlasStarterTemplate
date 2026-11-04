@@ -1,0 +1,101 @@
+/* Collapsed rail */
+.rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 16px 0;
+}
+
+.logoButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: var(--atlas-text);
+}
+
+.logoButton:hover {
+  background-color: color-mix(in srgb, var(--atlas-text) 8%, transparent);
+}
+
+.railCreate {
+  margin-top: 20px;
+}
+
+.railItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.railFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+/* Expanded panel */
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 16px 0 20px;
+}
+
+.wordmark {
+  display: block;
+  color: var(--atlas-text);
+}
+
+.panelCreate {
+  padding: 24px 16px 12px;
+}
+
+.panelBody {
+  flex: 1;
+  min-height: 0;
+}
+
+.panelSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 12px;
+}
+
+.divider {
+  margin: 12px 0;
+  border-color: var(--atlas-divider);
+}
+
+.panelFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+/* Shared */
+.avatarButton {
+  border-radius: 50%;
+}
+
+.avatar {
+  background-color: var(--atlas-textSecondary);
+  color: var(--atlas-card);
+  font-size: 13px;
+  font-weight: 600;
+}
