@@ -16,14 +16,14 @@
 .title {
   flex: 1;
   min-width: 0;
-  font-size: 13px;
-  color: color-mix(in srgb, var(--atlas-text) 85%, transparent);
+  font-size: var(--mantine-font-size-sm);
+  color: var(--atlas-chart-title);
 }
 
 .icon {
   display: block;
   flex: none;
-  background-color: color-mix(in srgb, var(--atlas-text) 60%, transparent);
+  background-color: var(--atlas-textSecondary);
   mask-position: center;
   mask-repeat: no-repeat;
   mask-size: contain;
@@ -73,20 +73,20 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
-  color: color-mix(in srgb, var(--atlas-text) 70%, transparent);
+  font-size: var(--mantine-font-size-xs);
+  color: var(--atlas-legend);
 }
 
 .legendSwatch {
   width: 8px;
   height: 8px;
-  border-radius: 2px;
+  border-radius: var(--mantine-radius-sm);
 }
 
 .tooltip {
   min-width: 140px;
   padding: 8px 10px;
-  font-size: 12px;
+  font-size: var(--mantine-font-size-xs);
   background-color: var(--atlas-card);
   border: 1px solid var(--atlas-border);
   border-radius: var(--mantine-radius-md);

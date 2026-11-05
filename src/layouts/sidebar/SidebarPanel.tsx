@@ -8,14 +8,15 @@ import {
   SidebarNavItem,
   SidebarSection,
 } from '../../components/sidebar';
-import { primaryNavItems, searchItem, sessionsIcon } from './navConfig';
+import { ATLAS_RADIUS_FULL } from '../../theme';
+import { primaryNavItems, searchItem, chatIcon } from './navConfig';
 import { ProfileMenu } from './ProfileMenu';
 import { sampleSessions } from './sampleSessions';
 import classes from './Sidebar.module.css';
 import { ThemeToggle } from './ThemeToggle';
 
 /** Expanded sidebar with labels, projects and sessions. */
-export function SidebarPanel({ onCollapse }: { onCollapse: () => void }) {
+export function SidebarPanel({ onCollapse, onCreate }: { onCollapse: () => void; onCreate: () => void }) {
   const [activeSessionId, setActiveSessionId] = useState(sampleSessions[0]?.id);
 
   return (
@@ -30,7 +31,7 @@ export function SidebarPanel({ onCollapse }: { onCollapse: () => void }) {
       </div>
 
       <div className={classes.panelCreate}>
-        <Button fullWidth size="lg" radius={999} fz={16} fw={500} leftSection={<PlusIcon />}>
+        <Button fullWidth size="lg" radius={ATLAS_RADIUS_FULL} fz="md" fw={500} leftSection={<PlusIcon />} onClick={onCreate}>
           Create New Session
         </Button>
       </div>
@@ -60,7 +61,7 @@ export function SidebarPanel({ onCollapse }: { onCollapse: () => void }) {
 
         <div className={classes.panelSection}>
           <SidebarSection title="Sessions">
-            <SidebarGroup icon={sessionsIcon} label="Ongoing" count={sampleSessions.length}>
+            <SidebarGroup icon={chatIcon} label="Ongoing" count={sampleSessions.length}>
               {sampleSessions.map((session) => (
                 <SidebarListItem
                   key={session.id}

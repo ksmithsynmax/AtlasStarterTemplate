@@ -7,6 +7,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { atlasRadius } from '../../theme';
 import { ChartCard, type ChartCardProps } from './ChartCard';
 import { seriesTooltip } from './seriesTooltip';
 import {
@@ -68,7 +69,7 @@ export function BarChart<T extends object>({
               name={s.label}
               fill={s.color}
               stackId={stacked ? 'stack' : undefined}
-              radius={!stacked || i === colored.length - 1 ? [4, 4, 0, 0] : 0}
+              radius={!stacked || i === colored.length - 1 ? [atlasRadius.sm, atlasRadius.sm, 0, 0] : 0}
               isAnimationActive={false}
             />
           ))}

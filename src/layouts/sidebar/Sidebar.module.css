@@ -13,12 +13,12 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: var(--mantine-radius-md);
   color: var(--atlas-text);
 }
 
 .logoButton:hover {
-  background-color: color-mix(in srgb, var(--atlas-text) 8%, transparent);
+  background-color: var(--atlas-hover);
 }
 
 .railCreate {
@@ -96,6 +96,6 @@
 .avatar {
   background-color: var(--atlas-textSecondary);
   color: var(--atlas-card);
-  font-size: 13px;
+  font-size: var(--mantine-font-size-xs);
   font-weight: 600;
 }

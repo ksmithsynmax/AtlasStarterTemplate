@@ -1,4 +1,4 @@
-import { atlasSeriesColor, atlasVar, cssMix } from '../../theme';
+import { atlasFontSizes, atlasSeriesColor, atlasVar } from '../../theme';
 import type { ChartSeries, LegendItem } from './types';
 
 /** Series color: explicit token if given, otherwise the Atlas series order. */
@@ -32,7 +32,7 @@ export function maxOf<T extends object>(data: T[], keys: string[], stacked = fal
   }, 0);
 }
 
-const tick = { fill: atlasVar('textSecondary'), fontSize: 12 };
+const tick = { fill: atlasVar('textSecondary'), fontSize: atlasFontSizes.xs };
 
 export const xAxisProps = {
   axisLine: false,
@@ -57,4 +57,4 @@ export const gridProps = {
 } as const;
 
 export const lineCursor = { stroke: atlasVar('border') };
-export const barCursor = { fill: cssMix(atlasVar('text'), 4, 'transparent') };
+export const barCursor = { fill: atlasVar('hover') };

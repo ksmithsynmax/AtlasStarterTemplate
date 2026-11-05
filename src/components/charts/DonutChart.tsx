@@ -4,7 +4,7 @@ import { ChartTooltip } from './ChartTooltip';
 import { seriesColor } from './chartStyles';
 import { formatCompact } from './format';
 import type { ValueFormatter } from './types';
-import type { AtlasToken } from '../../theme';
+import { atlasRadius, type AtlasToken } from '../../theme';
 import classes from './DonutChart.module.css';
 
 export interface DonutSlice {
@@ -53,7 +53,7 @@ export function DonutChart({ data, totalLabel, valueFormatter = formatCompact, .
             startAngle={90}
             endAngle={-270}
             paddingAngle={4}
-            cornerRadius={8}
+            cornerRadius={atlasRadius.md}
             stroke="none"
             isAnimationActive={false}
           >

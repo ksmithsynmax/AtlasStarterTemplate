@@ -1,4 +1,5 @@
 import {
+  atlasDerivedMix,
   atlasSeriesTextMix,
   atlasSeriesTokens,
   atlasTokenLabels,
@@ -54,8 +55,18 @@ export const contrastSections: ContrastSection[] = [
     checks: [
       textCheck('Text on page', 'Page title, menus', (p) => p.text, (p) => p.background),
       textCheck('Text on card', 'Tooltip values, donut total', (p) => p.text, (p) => p.card),
-      textCheck('Chart titles', 'Text at 85% on card', (p) => mixHex(p.text, 85, p.card), (p) => p.card),
-      textCheck('Legend labels', 'Text at 70% on card', (p) => mixHex(p.text, 70, p.card), (p) => p.card),
+      textCheck(
+        'Chart titles',
+        `Text at ${atlasDerivedMix['chart-title']}% on card`,
+        (p) => mixHex(p.text, atlasDerivedMix['chart-title'], p.card),
+        (p) => p.card,
+      ),
+      textCheck(
+        'Legend labels',
+        `Text at ${atlasDerivedMix.legend}% on card`,
+        (p) => mixHex(p.text, atlasDerivedMix.legend, p.card),
+        (p) => p.card,
+      ),
       textCheck('Secondary text on card', 'Axis labels, captions, notes', (p) => p.textSecondary, (p) => p.card),
       textCheck(
         'Secondary text on page',

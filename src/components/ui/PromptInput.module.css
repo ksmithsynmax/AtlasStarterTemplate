@@ -1,0 +1,26 @@
+.input {
+  height: 48px;
+  padding-inline-start: 20px;
+  font-size: var(--mantine-font-size-sm);
+  background-color: var(--atlas-card);
+  border-color: var(--atlas-card-border);
+}
+
+.input::placeholder {
+  color: var(--atlas-textSecondary);
+}
+
+.input:focus {
+  border-color: var(--atlas-primary);
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+  padding-inline-end: 8px;
+}
+
+.action {
+  background-color: var(--atlas-hover);
+  color: var(--atlas-textSecondary);
+}

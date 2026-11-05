@@ -1,5 +1,5 @@
 import { Badge, Card, Stack, Text } from '@mantine/core';
-import { atlasPalette, contrastRatio, type AtlasScheme } from '../../theme';
+import { ATLAS_RADIUS_FULL, atlasPalette, contrastRatio, type AtlasScheme } from '../../theme';
 import { contrastSections, type ContrastCheck } from './contrastChecks';
 import classes from './AccessibilityCard.module.css';
 
@@ -21,7 +21,7 @@ function CheckRow({ check, scheme }: { check: ContrastCheck; scheme: AtlasScheme
       <div>
         <div className={classes.preview} style={{ backgroundColor: bg }}>
           {check.preview === 'text' ? (
-            <Text span fz={13} c={fg}>
+            <Text span fz="sm" c={fg}>
               Aa
             </Text>
           ) : (
@@ -45,10 +45,10 @@ function CheckRow({ check, scheme }: { check: ContrastCheck; scheme: AtlasScheme
         <Badge
           variant="light"
           color={passes ? 'success' : 'error'}
-          radius="xl"
+          radius={ATLAS_RADIUS_FULL}
           h={20}
           px={10}
-          fz={12}
+          fz="xs"
           fw={400}
           tt="none"
         >
@@ -69,10 +69,10 @@ export function AccessibilityCard({ scheme }: AccessibilityCardProps) {
       <Stack gap={24}>
         {contrastSections.map((section) => (
           <section key={section.title}>
-            <Text fz={15} fw={700}>
+            <Text fz="md" fw={700}>
               {section.title}
             </Text>
-            <Text fz={12} c="dimmed" mt={6} mb={16}>
+            <Text fz="xs" c="dimmed" mt={6} mb={16}>
               {section.description}
             </Text>
             <div className={classes.table}>

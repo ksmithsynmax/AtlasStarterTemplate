@@ -9,13 +9,13 @@
 }
 
 .total {
-  font-size: 22px;
+  font-size: var(--mantine-font-size-xl);
   font-weight: 700;
   line-height: 1.2;
   color: var(--atlas-text);
 }
 
 .totalLabel {
-  font-size: 12px;
+  font-size: var(--mantine-font-size-xs);
   color: var(--atlas-textSecondary);
 }

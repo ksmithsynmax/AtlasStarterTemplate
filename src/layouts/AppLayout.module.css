@@ -3,3 +3,8 @@
   background-color: var(--atlas-background);
   border-inline-end: 1px solid var(--atlas-card-border);
 }
+
+.header {
+  background-color: var(--atlas-background);
+  border-bottom: 1px solid var(--atlas-card-border);
+}

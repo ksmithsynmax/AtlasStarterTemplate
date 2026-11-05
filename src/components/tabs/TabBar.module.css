@@ -1,0 +1,58 @@
+.bar {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  max-width: 200px;
+  padding: 0 8px 0 12px;
+  border-inline-end: 1px solid var(--atlas-card-border);
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: var(--atlas-text);
+}
+
+.tab[data-active] {
+  color: var(--atlas-text);
+  box-shadow: inset 0 -2px 0 var(--atlas-primary);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--atlas-primary);
+  outline-offset: -2px;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.close {
+  flex-shrink: 0;
+  visibility: hidden;
+}
+
+.tab[data-active] .close,
+.tab:hover .close {
+  visibility: visible;
+}

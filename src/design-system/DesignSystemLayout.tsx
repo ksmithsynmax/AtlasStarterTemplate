@@ -10,10 +10,10 @@ export function DesignSystemLayout() {
   return (
     <Stack gap={24}>
       <div>
-        <Title order={2} fz={20}>
+        <Title order={2}>
           Design system
         </Title>
-        <Text fz={13} c="dimmed">
+        <Text fz="sm" c="dimmed">
           Atlas V2 tokens and components used across the prototype.
         </Text>
       </div>

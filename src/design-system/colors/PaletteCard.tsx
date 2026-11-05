@@ -17,7 +17,7 @@ export function PaletteCard({ scheme }: PaletteCardProps) {
 
   return (
     <Card>
-      <Text fz={13} mb={16}>
+      <Text fz="sm" mb={16}>
         Atlas V2 · {scheme === 'dark' ? 'Dark' : 'Light'} mode palette
       </Text>
       <SimpleGrid cols={{ base: 2, sm: 3, md: 6 }} spacing={8} verticalSpacing={12}>
@@ -29,10 +29,10 @@ export function PaletteCard({ scheme }: PaletteCardProps) {
               bdrs="sm"
               bd={`1px solid ${atlasVar('border')}`}
             />
-            <Text fz={11} mt={4}>
+            <Text fz="xxs" mt={4}>
               {atlasTokenLabels[token]}
             </Text>
-            <Text fz={11} c="dimmed">
+            <Text fz="xxs" c="dimmed">
               {palette[token]}
             </Text>
           </div>

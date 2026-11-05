@@ -1,0 +1,30 @@
+.root {
+  padding: 4px;
+  background-color: var(--atlas-card);
+  border: 1px solid var(--atlas-card-border);
+}
+
+.control::before {
+  display: none;
+}
+
+.indicator {
+  background-color: var(--atlas-primary);
+  box-shadow: none;
+}
+
+.label {
+  padding: 6px 16px;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 500;
+}
+
+.label:hover {
+  color: var(--atlas-text);
+}
+
+.label[data-active],
+.label[data-active]:hover {
+  color: var(--atlas-card);
+}

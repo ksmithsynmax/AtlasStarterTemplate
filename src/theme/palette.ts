@@ -83,8 +83,17 @@ export const atlasSeriesTextMix = [0, 35, 60] as const;
 
 export const ATLAS_MAX_SERIES = atlasSeriesTokens.length * atlasSeriesTextMix.length;
 
-/** Text-at-opacity strokes from the Figma spec; defined in `theme.ts`. */
-export type AtlasDerivedToken = 'border' | 'card-border' | 'divider';
+/** Text mixed toward transparent, from the Figma spec; defined in `theme.ts`. */
+export const atlasDerivedMix = {
+  'chart-title': 85,
+  legend: 70,
+  border: 10,
+  'card-border': 8,
+  hover: 8,
+  divider: 6,
+} as const;
+
+export type AtlasDerivedToken = keyof typeof atlasDerivedMix;
 
 export const atlasVar = (token: AtlasToken | AtlasDerivedToken) => `var(--atlas-${token})`;
 

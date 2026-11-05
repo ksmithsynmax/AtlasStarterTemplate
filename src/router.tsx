@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from 'react-router';
 import { DesignSystemLayout } from './design-system/DesignSystemLayout';
 import { ChartsPage } from './design-system/charts/ChartsPage';
 import { ColorsPage } from './design-system/colors/ColorsPage';
+import { FoundationsPage } from './design-system/foundations/FoundationsPage';
 import { AppLayout } from './layouts/AppLayout';
 import { HomePage } from './pages/HomePage';
 
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="colors" replace /> },
           { path: 'colors', element: <ColorsPage /> },
+          { path: 'foundations', element: <FoundationsPage /> },
           { path: 'charts', element: <ChartsPage /> },
         ],
       },

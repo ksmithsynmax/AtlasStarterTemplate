@@ -1,0 +1,30 @@
+.item {
+  border: 0;
+}
+
+.control {
+  padding: 0 8px;
+  border-radius: var(--mantine-radius-md);
+}
+
+.control:hover {
+  background-color: var(--atlas-hover);
+}
+
+.label {
+  padding: 8px 0;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+}
+
+.chevron {
+  color: var(--atlas-textSecondary);
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 8px 12px 48px;
+}

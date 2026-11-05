@@ -11,7 +11,8 @@ import {
   type VariantColorsResolver,
 } from '@mantine/core';
 import { mixHex } from './color';
-import { atlasPalette, atlasTokenOrder, atlasVar, cssMix, type AtlasToken } from './palette';
+import { atlasDerivedMix, atlasPalette, atlasTokenOrder, atlasVar, cssMix, type AtlasToken } from './palette';
+import { atlasFontSizes, atlasRadius, px } from './scale';
 
 const { light, dark } = atlasPalette;
 
@@ -104,10 +105,11 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   }
 
   if (input.variant === 'subtle') {
-    const tint = input.color === 'gray' ? atlasVar('text') : color;
+    const gray = input.color === 'gray';
+    const tint = gray ? atlasVar('text') : color;
     return {
       ...base,
-      hover: cssMix(tint, 8, 'transparent'),
+      hover: gray ? atlasVar('hover') : cssMix(tint, atlasDerivedMix.hover, 'transparent'),
       color: tint,
       hoverColor: tint,
     };
@@ -123,9 +125,9 @@ function schemeVariables(scheme: typeof light) {
 
   return {
     ...atlasVars,
-    '--atlas-border': cssMix(scheme.text, 10, 'transparent'),
-    '--atlas-card-border': cssMix(scheme.text, 8, 'transparent'),
-    '--atlas-divider': cssMix(scheme.text, 6, 'transparent'),
+    ...Object.fromEntries(
+      Object.entries(atlasDerivedMix).map(([token, mix]) => [`--atlas-${token}`, cssMix(scheme.text, mix, 'transparent')]),
+    ),
 
     '--mantine-color-body': scheme.card,
     '--mantine-color-text': scheme.text,
@@ -154,8 +156,26 @@ export const theme = createTheme({
   white: light.card,
   black: light.text,
   fontFamily: "'Inter Variable', Inter, system-ui, -apple-system, sans-serif",
-  headings: { fontFamily: "'Inter Variable', Inter, system-ui, -apple-system, sans-serif" },
-  radius: { xs: '4px', sm: '6px', md: '8px', lg: '12px', xl: '16px' },
+  headings: {
+    fontFamily: "'Inter Variable', Inter, system-ui, -apple-system, sans-serif",
+    sizes: {
+      h1: { fontSize: px(atlasFontSizes.xl) },
+      h2: { fontSize: px(atlasFontSizes.lg) },
+      h3: { fontSize: px(atlasFontSizes.md) },
+      h4: { fontSize: px(atlasFontSizes.sm) },
+      h5: { fontSize: px(atlasFontSizes.xs) },
+      h6: { fontSize: px(atlasFontSizes.xxs) },
+    },
+  },
+  // Mantine also reads xs and xl internally, so they clamp to the ends of the scale.
+  radius: {
+    xs: px(atlasRadius.sm),
+    sm: px(atlasRadius.sm),
+    md: px(atlasRadius.md),
+    lg: px(atlasRadius.lg),
+    xl: px(atlasRadius.lg),
+  },
+  fontSizes: Object.fromEntries(Object.entries(atlasFontSizes).map(([key, value]) => [key, px(value)])),
   defaultRadius: 'md',
   variantColorResolver,
   components: {
