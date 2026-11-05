@@ -1,0 +1,100 @@
+.content {
+  border: 1px solid var(--atlas-card-border);
+  background-color: var(--atlas-card);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--atlas-border);
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: var(--atlas-textSecondary);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--atlas-text);
+  font: inherit;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.input::placeholder {
+  color: var(--atlas-textSecondary);
+}
+
+.body {
+  padding: 12px 8px;
+}
+
+.groupLabel {
+  padding: 4px 12px 8px;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+}
+
+.result {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: var(--mantine-radius-md);
+  text-align: start;
+}
+
+/* --atlas-hover is the card color in dark mode, so it would vanish on this card surface. */
+.result:hover,
+.result:focus-visible {
+  background-color: var(--atlas-border);
+}
+
+.resultIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 20px;
+  color: var(--atlas-textSecondary);
+}
+
+.resultText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.resultTitle {
+  overflow: hidden;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-sm);
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resultMeta {
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+}
+
+.empty {
+  padding: 16px 12px;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-sm);
+  text-align: center;
+}

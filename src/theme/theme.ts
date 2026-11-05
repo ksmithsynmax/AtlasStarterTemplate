@@ -4,6 +4,7 @@ import {
   createTheme,
   defaultVariantColorsResolver,
   getThemeColor,
+  ScrollArea,
   Tooltip,
   virtualColor,
   type CSSVariablesResolver,
@@ -81,6 +82,9 @@ function buildColors() {
   return colors;
 }
 
+/** Share of Text mixed into a filled color on hover. */
+const FILLED_HOVER_MIX = 15;
+
 const variantColorResolver: VariantColorsResolver = (input) => {
   const base = defaultVariantColorsResolver(input);
   const color = getThemeColor(input.color, input.theme);
@@ -88,7 +92,7 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   if (input.variant === 'filled') {
     return {
       ...base,
-      hover: cssMix(atlasVar('text'), 15, color),
+      hover: cssMix(atlasVar('text'), FILLED_HOVER_MIX, color),
       color: atlasVar('card'),
       hoverColor: atlasVar('card'),
     };
@@ -118,7 +122,7 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   return base;
 };
 
-function schemeVariables(scheme: typeof light) {
+function schemeVariables(scheme: typeof light, overrides: Record<string, string> = {}) {
   const atlasVars = Object.fromEntries(
     atlasTokenOrder.map((token) => [`--atlas-${token}`, scheme[token]]),
   );
@@ -128,6 +132,9 @@ function schemeVariables(scheme: typeof light) {
     ...Object.fromEntries(
       Object.entries(atlasDerivedMix).map(([token, mix]) => [`--atlas-${token}`, cssMix(scheme.text, mix, 'transparent')]),
     ),
+    ...overrides,
+
+    '--atlas-primary-hover': cssMix(scheme.text, FILLED_HOVER_MIX, scheme.primary),
 
     '--mantine-color-body': scheme.card,
     '--mantine-color-text': scheme.text,
@@ -146,8 +153,17 @@ function schemeVariables(scheme: typeof light) {
 
 export const cssVariablesResolver: CSSVariablesResolver = () => ({
   variables: {},
-  light: schemeVariables(light),
-  dark: schemeVariables(dark),
+  light: schemeVariables(light, {
+    '--atlas-tooltip-bg': light.text,
+    '--atlas-tooltip-color': light.card,
+    '--atlas-tooltip-border': 'transparent',
+  }),
+  dark: schemeVariables(dark, {
+    '--atlas-hover': dark.card,
+    '--atlas-tooltip-bg': dark.card,
+    '--atlas-tooltip-color': dark.text,
+    '--atlas-tooltip-border': cssMix(dark.text, atlasDerivedMix.border, 'transparent'),
+  }),
 });
 
 export const theme = createTheme({
@@ -183,8 +199,21 @@ export const theme = createTheme({
       defaultProps: { radius: 'lg', padding: 20, withBorder: true },
       styles: { root: { borderColor: atlasVar('card-border') } },
     }),
+    ScrollArea: ScrollArea.extend({
+      defaultProps: { scrollbarSize: 4 },
+      styles: {
+        scrollbar: { padding: 0, backgroundColor: 'transparent' },
+        thumb: { backgroundColor: atlasVar('card') },
+      },
+    }),
     Tooltip: Tooltip.extend({
-      styles: { tooltip: { backgroundColor: atlasVar('text'), color: atlasVar('card') } },
+      styles: {
+        tooltip: {
+          backgroundColor: 'var(--atlas-tooltip-bg)',
+          color: 'var(--atlas-tooltip-color)',
+          border: '1px solid var(--atlas-tooltip-border)',
+        },
+      },
     }),
   },
 });

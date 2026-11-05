@@ -63,31 +63,81 @@
   color: var(--atlas-text);
 }
 
-.count {
-  font-size: var(--mantine-font-size-xs);
-  font-weight: 600;
+.chevron {
+  flex-shrink: 0;
+  color: var(--atlas-textSecondary);
+  transition: transform 150ms ease;
 }
 
-.chevron {
+.treeItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: var(--mantine-radius-md);
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-sm);
+  text-align: start;
+}
+
+.treeItem:hover {
+  background-color: var(--atlas-hover);
+}
+
+.treeChevron {
   flex-shrink: 0;
   transition: transform 150ms ease;
 }
 
+.treeChevron[data-opened] {
+  transform: rotate(90deg);
+}
+
+.treeCount {
+  flex-shrink: 0;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+}
+
 .listItem {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   width: 100%;
   padding: 8px 12px;
   border-radius: var(--mantine-radius-md);
   text-align: start;
 }
 
-.listItem:hover,
+/* Row padding + icon + gap, so the dot lines up with the parent row's label. */
+.listItem[data-nested] {
+  padding-inline-start: 42px;
+}
+
+.listItem:not([data-static]):hover,
 .listItem[data-active] {
   background-color: var(--atlas-hover);
 }
 
+.listLeft {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 20px;
+}
+
+.listBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .listTitle {
   overflow: hidden;
+  line-height: 20px;
   color: var(--atlas-text);
   font-size: var(--mantine-font-size-sm);
   font-weight: 500;
@@ -99,6 +149,55 @@
   margin-top: 2px;
   color: var(--atlas-textSecondary);
   font-size: var(--mantine-font-size-xs);
+}
+
+.groupRow {
+  position: relative;
+}
+
+.groupRow:hover > .row {
+  background-color: var(--atlas-hover);
+}
+
+/* Room for two 24px actions + 4px gap + 8px, so the label truncates instead of sliding under them. */
+.groupRow[data-with-actions]:is(:hover, :focus-within) > .row .chevron {
+  margin-inline-start: 60px;
+}
+
+/* The actions take the right section's place while shown. */
+.groupRow[data-with-actions]:is(:hover, :focus-within) > .row .rightSection {
+  display: none;
+}
+
+/* Sits just left of the chevron (12px row padding + 14px chevron + 8px). */
+.rowActions {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 34px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.groupRow:is(:hover, :focus-within) .rowActions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rowAction {
+  color: var(--atlas-text);
+}
+
+.rowAction:hover {
+  background-color: var(--atlas-border);
+}
+
+.rightSection {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
 }
 
 .empty {

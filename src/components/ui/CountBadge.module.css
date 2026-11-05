@@ -1,0 +1,14 @@
+.badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background-color: var(--atlas-border);
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}

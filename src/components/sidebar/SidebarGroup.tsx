@@ -1,6 +1,7 @@
 import { AccordionChevron, Collapse, UnstyledButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import type { ReactNode } from 'react';
+import { CountBadge } from '../ui';
 import classes from './Sidebar.module.css';
 
 export interface SidebarGroupProps {
@@ -20,7 +21,7 @@ export function SidebarGroup({ icon, label, count, defaultOpened = true, childre
       <UnstyledButton className={classes.row} onClick={toggle} aria-expanded={opened}>
         <span className={classes.icon}>{icon}</span>
         <span className={classes.label}>{label}</span>
-        {count !== undefined && <span className={classes.count}>{count}</span>}
+        {count !== undefined && <CountBadge count={count} />}
         <AccordionChevron
           size={14}
           className={classes.chevron}

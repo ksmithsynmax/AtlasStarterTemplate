@@ -3,6 +3,7 @@ export { ChatIcon, type ChatIconProps } from './ChatIcon';
 export { DatasetIcon, type DatasetIconProps } from './DatasetIcon';
 export { DatabaseIcon, type DatabaseIconProps } from './DatabaseIcon';
 export { FolderIcon, type FolderIconProps } from './FolderIcon';
+export { KebabIcon, type KebabIconProps } from './KebabIcon';
 export { SunIcon, type SunIconProps } from './SunIcon';
 export { VisualizationIcon, type VisualizationIconProps } from './VisualizationIcon';
 export { SynMaxLogo, type SynMaxLogoProps } from './SynMaxLogo';

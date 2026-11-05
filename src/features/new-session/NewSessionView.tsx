@@ -1,4 +1,5 @@
 import { Stack, Title } from '@mantine/core';
+import { Calendar, Send01 } from '@untitledui/icons';
 import { useState } from 'react';
 import { PillTabs, PromptInput, SuggestionAccordion } from '../../components/ui';
 import { domainFilters, domains, type DomainFilter } from './domains';
@@ -25,8 +26,8 @@ export function NewSessionView({ onSubmit }: NewSessionViewProps) {
           onChange={setPrompt}
           onSubmit={onSubmit}
           placeholder="Share a goal, datasets or idea, and we'll work through it together"
-          actions={[{ label: 'Pick a date range', icon: 'C' }]}
-          sendIcon="S"
+          actions={[{ label: 'Pick a date range', icon: <Calendar size={16} /> }]}
+          sendIcon={<Send01 size={16} />}
         />
       </Stack>
 

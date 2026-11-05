@@ -14,3 +14,11 @@ export const sampleSessions: Session[] = [
   { id: 's7', title: 'Gulf Coast Storage Levels', updated: '1 week ago' },
   { id: 's8', title: 'Haynesville Production Forecast', updated: '2 weeks ago' },
 ];
+
+/** `updated` holds the next run time for scheduled sessions. */
+export const sampleScheduledSessions: Session[] = [
+  { id: 'sch1', title: 'Weekly Permian Rig Count Report', updated: 'Every Monday, 8:00 AM' },
+  { id: 'sch2', title: 'Daily Hormuz Vessel Transits', updated: 'Daily, 6:00 AM' },
+  { id: 'sch3', title: 'LNG Terminal Utilization Snapshot', updated: 'Tomorrow, 9:00 AM' },
+  { id: 'sch4', title: 'Monthly Gulf Coast Storage Summary', updated: 'Dec 1, 7:00 AM' },
+];

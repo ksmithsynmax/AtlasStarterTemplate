@@ -1,0 +1,44 @@
+.pane {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 16px 0 20px;
+  border-bottom: 1px solid var(--atlas-card-border);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-md);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}

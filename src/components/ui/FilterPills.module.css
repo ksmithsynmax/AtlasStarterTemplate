@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pill {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.pill:hover {
+  color: var(--atlas-text);
+}
+
+.pill[data-active] {
+  border-color: var(--atlas-border);
+  background-color: var(--atlas-divider);
+  color: var(--atlas-text);
+}

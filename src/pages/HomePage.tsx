@@ -1,5 +1,6 @@
 import { Card, Text, Title } from '@mantine/core';
 import { NewSessionView } from '../features/new-session/NewSessionView';
+import { SessionView } from '../features/session/SessionView';
 import { useSessionTabsContext } from '../layouts/useSessionTabs';
 
 export function HomePage() {
@@ -7,6 +8,10 @@ export function HomePage() {
 
   if (activeTab?.kind === 'new') {
     return <NewSessionView key={activeTab.id} onSubmit={(prompt) => start(activeTab.id, prompt)} />;
+  }
+
+  if (activeTab?.kind === 'session') {
+    return <SessionView key={activeTab.id} sessionId={activeTab.id} title={activeTab.label} />;
   }
 
   return (

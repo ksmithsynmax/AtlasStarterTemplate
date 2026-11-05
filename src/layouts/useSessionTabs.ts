@@ -10,6 +10,7 @@ export interface SessionTab {
 const initialTabs: SessionTab[] = [
   { id: 'vessel-dark-activity', label: 'Vessel Dark Activity', kind: 'session' },
   { id: 'permian-development', label: 'analyze development activity in permian basin', kind: 'session' },
+  { id: 's1', label: 'Hormuz Strait Activity Detection', kind: 'session' },
 ];
 
 let nextId = 1;
@@ -33,6 +34,14 @@ export function useSessionTabs() {
     }
   };
 
+  /** Switches to the session's tab, opening one if it isn't open yet. */
+  const open = (id: string, label: string) => {
+    setTabs((current) =>
+      current.some((tab) => tab.id === id) ? current : [...current, { id, label, kind: 'session' }],
+    );
+    setActiveId(id);
+  };
+
   /** Turns a `new` tab into a session titled by its first prompt. */
   const start = (id: string, prompt: string) => {
     setTabs((current) =>
@@ -42,7 +51,7 @@ export function useSessionTabs() {
 
   const activeTab = tabs.find((tab) => tab.id === activeId);
 
-  return { tabs, activeId, activeTab, select: setActiveId, create, close, start };
+  return { tabs, activeId, activeTab, select: setActiveId, create, open, close, start };
 }
 
 export type SessionTabsState = ReturnType<typeof useSessionTabs>;

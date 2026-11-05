@@ -2,13 +2,21 @@ import { ActionIcon, Tooltip, UnstyledButton } from '@mantine/core';
 import { PlusIcon, SynMaxIconLogo } from '../../components/icons';
 import { SidebarNavItem } from '../../components/sidebar';
 import { ATLAS_RADIUS_FULL } from '../../theme';
-import { primaryNavItems, searchItem } from './navConfig';
+import { agentConnectors, datalinks, primaryNavItems, searchItem } from './navConfig';
 import { ProfileMenu } from './ProfileMenu';
 import classes from './Sidebar.module.css';
 import { ThemeToggle } from './ThemeToggle';
 
 /** Collapsed 64px sidebar: icons only, the logo expands it. */
-export function SidebarRail({ onExpand, onCreate }: { onExpand: () => void; onCreate: () => void }) {
+export function SidebarRail({
+  onExpand,
+  onCreate,
+  onSearch,
+}: {
+  onExpand: () => void;
+  onCreate: () => void;
+  onSearch: () => void;
+}) {
   return (
     <div className={classes.rail}>
       <Tooltip label="Expand sidebar" position="right">
@@ -19,13 +27,19 @@ export function SidebarRail({ onExpand, onCreate }: { onExpand: () => void; onCr
 
       <Tooltip label="Create New Session" position="right">
         <ActionIcon size={40} radius={ATLAS_RADIUS_FULL} className={classes.railCreate} aria-label="Create New Session" onClick={onCreate}>
-          <PlusIcon />
+          <PlusIcon strokeWidth={2} />
         </ActionIcon>
       </Tooltip>
 
       <nav className={classes.railItems}>
-        {[searchItem, ...primaryNavItems].map((item) => (
-          <SidebarNavItem key={item.label} collapsed icon={item.icon} label={item.label} />
+        {[searchItem, agentConnectors, datalinks, ...primaryNavItems].map((item) => (
+          <SidebarNavItem
+            key={item.label}
+            collapsed
+            icon={item.icon}
+            label={item.label}
+            onClick={item === searchItem ? onSearch : undefined}
+          />
         ))}
       </nav>
 

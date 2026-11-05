@@ -1,0 +1,12 @@
+.button {
+  color: var(--atlas-textSecondary);
+}
+
+.button:hover {
+  background-color: var(--atlas-border);
+  color: var(--atlas-text);
+}
+
+.button[data-round] {
+  border: 1px solid var(--atlas-border);
+}

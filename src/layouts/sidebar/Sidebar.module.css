@@ -93,9 +93,15 @@
   border-radius: 50%;
 }
 
+/* Matches filled Primary buttons so the avatar shares their hover. */
 .avatar {
-  background-color: var(--atlas-textSecondary);
+  background-color: var(--atlas-primary);
   color: var(--atlas-card);
-  font-size: var(--mantine-font-size-xs);
+  font-size: var(--mantine-font-size-sm);
   font-weight: 600;
+}
+
+.avatarButton:hover .avatar,
+.avatarButton[aria-expanded='true'] .avatar {
+  background-color: var(--atlas-primary-hover);
 }
