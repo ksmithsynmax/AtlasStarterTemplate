@@ -1,0 +1,116 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.title {
+  margin: 0;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xl);
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card[data-wide] {
+  grid-column: 1 / -1;
+}
+
+.card[data-wide] .stage {
+  padding: 0;
+  border-style: solid;
+  border-color: var(--atlas-card-border);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px 0;
+}
+
+.cardTitle {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-md);
+  font-weight: 600;
+}
+
+.tag {
+  padding: 2px 8px;
+  border: 1px solid var(--atlas-border);
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+}
+
+.tag[data-domain='maritime'] {
+  color: var(--atlas-accent3);
+}
+
+.tag[data-domain='energy'] {
+  color: var(--atlas-success);
+}
+
+.status {
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+}
+
+.status[data-status='ready'] {
+  color: var(--atlas-primary);
+}
+
+.description {
+  margin: 6px 0 0;
+  padding: 0 20px;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.stage {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  margin: 16px;
+  padding: 24px;
+  border: 1px dashed var(--atlas-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-background);
+}
+
+.empty {
+  padding: 48px 24px;
+  border: 1px dashed var(--atlas-border);
+  border-radius: var(--mantine-radius-lg);
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-sm);
+  text-align: center;
+}

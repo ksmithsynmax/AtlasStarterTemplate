@@ -1,0 +1,29 @@
+---
+description: Atlas design-system rules for colors, sizes, icons and reusable components
+globs: src/**
+alwaysApply: false
+---
+
+# Atlas design system
+
+Stack: React + Vite, Mantine 9, Recharts, react-router, `@untitledui/icons`, Inter Variable.
+
+## Tokens only
+
+- **Colors**: only the Atlas palette, via `var(--atlas-*)` in CSS or `atlasVar('token')` in TS. No hex values, Mantine color names or ad-hoc `color-mix` in components.
+  - Surfaces: `background` (page and sidebar), `card`. Text: `text`, `textSecondary`. Brand: `primary`; `success` for E&P, `accent3` for Maritime.
+  - Derived: `border` (Text 10%), `card-border` (8%), `hover` (8%), `divider` (6%).
+  - `--atlas-hover` equals the **card color in dark mode**, so on card surfaces use `--atlas-border` for hovers (see `IconButton`).
+- **Font sizes**: 10, 12, 14, 16, 20, 24 only, as `var(--mantine-font-size-xxs|xs|sm|md|lg|xl)`.
+- **Radius**: sm 4, md 8, lg 12 via `var(--mantine-radius-*)`; `ATLAS_RADIUS_FULL` for pills and circles only.
+
+## Components
+
+- Make everything reusable. Check `src/components/{ui,sidebar,chat,dashboard,charts,search}` before writing new UI.
+- Name icons plainly (`PlusIcon`), never with a `SynMaxIcon` prefix; only the logo is `SynMaxIconLogo`. Custom SVGs become components that use `currentColor` and take a `size` prop. Use Untitled UI for anything not supplied.
+- Rows without `onClick` are static and get no hover.
+
+## Verify
+
+- Run `npx tsc -b --noEmit` and `npx oxlint src` after changes.
+- Delete any temporary `public/_*.html` helpers after use.

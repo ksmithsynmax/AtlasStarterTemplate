@@ -1,6 +1,6 @@
 type Rgb = [number, number, number];
 
-function hexToRgb(hex: string): Rgb {
+export function hexToRgb(hex: string): Rgb {
   const value = hex.replace('#', '');
   return [0, 2, 4].map((i) => parseInt(value.slice(i, i + 2), 16)) as Rgb;
 }

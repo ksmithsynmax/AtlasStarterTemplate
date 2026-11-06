@@ -12,7 +12,15 @@ import {
   type VariantColorsResolver,
 } from '@mantine/core';
 import { mixHex } from './color';
-import { atlasDerivedMix, atlasPalette, atlasTokenOrder, atlasVar, cssMix, type AtlasToken } from './palette';
+import {
+  ATLAS_TINT_MIX,
+  atlasDerivedMix,
+  atlasPalette,
+  atlasTokenOrder,
+  atlasVar,
+  cssMix,
+  type AtlasToken,
+} from './palette';
 import { atlasFontSizes, atlasRadius, px } from './scale';
 
 const { light, dark } = atlasPalette;
@@ -101,7 +109,7 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   if (input.variant === 'light') {
     return {
       ...base,
-      background: cssMix(color, 14, 'transparent'),
+      background: cssMix(color, ATLAS_TINT_MIX, 'transparent'),
       hover: cssMix(color, 20, 'transparent'),
       color,
       hoverColor: color,

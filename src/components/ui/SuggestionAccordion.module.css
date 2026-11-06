@@ -1,3 +1,15 @@
+.section + .section {
+  margin-top: 20px;
+}
+
+.title {
+  margin: 0 0 4px;
+  padding: 0 8px;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
 .item {
   border: 0;
 }
@@ -16,6 +28,16 @@
   color: var(--atlas-text);
   font-size: var(--mantine-font-size-sm);
   font-weight: 500;
+}
+
+/* Same 28px slot the tiles used, so labels and prompt chips stay aligned. */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--atlas-textSecondary);
 }
 
 .chevron {

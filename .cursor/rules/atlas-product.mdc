@@ -1,0 +1,43 @@
+---
+description: What Atlas is, who it's for, and how this prototype is used
+alwaysApply: true
+---
+
+# Atlas product context
+
+Atlas is SynMax's AI analysis app. This repo is the **prototype sandbox** for new Atlas features; it is not production code.
+
+## The goal: domain templates
+
+- We're building **reusable dashboard templates** for our two domains: **Maritime** and **Energy (E&P)**.
+- Customers and internal SMEs keep rebuilding the same dashboards from scratch, which wastes time and tokens. Templates give them a consistent starting point.
+- **Consistency is the #1 ask** from SMEs. Prefer one shared pattern over per-dashboard variations.
+- Many components are needed in both domains. Build them domain-agnostic, with domain specifics passed in as data or props.
+
+## Products
+
+- SynMax products are being brought into Atlas: **Theia** (Maritime) and **Hyperion**, **Vulcan** and **BasinIQ** (Energy). They live in `src/lab/products.ts`.
+- They share charts and maps but differ by domain. Filter and tag by **product**, not by a "shared" bucket. A component with no product list is used by all of them.
+
+## Maps (current focus)
+
+- The production app builds maps with **deck.gl**.
+- Every product map has a **lasso** select and **clickable features** (ship detection, well pad and so on), plus product-specific filters, icons and variants.
+- Direction: one shared map core (basemap, toolbar, lasso, click selection, tooltip, legend, filter panel) with a **layer kit per product** (layers, icons, legend, detail card, filters). Each product map is the core plus its kit, and its variants are presets. See `docs/research/maps.md`.
+
+## How we learn
+
+- The team is interviewing SMEs in each domain about what they build for customers.
+- The user will share **dashboard links** and **interview learnings**. Record them in `docs/research/` (one file per interview or dashboard, plus a running `docs/research/findings.md` of recurring needs) so the knowledge survives between chats.
+- Before designing a template or component, check `docs/research/` for relevant findings.
+
+## Where things live
+
+- `/` is the app shell: sidebar, session tabs, the New Session view, and an open session (docked chat on the left, dashboard on the right).
+- `/lab` is the **Component Lab**: where the user tests **dashboard components** (charts, maps, tables, KPIs and so on) before they go into templates. It's not for app-shell UI like pills or badges. Register experiments in `src/lab/experiments.tsx`.
+- `/design-system/*` holds palette, type and radius, and charts. It's reached from the profile menu.
+
+## Open planning threads
+
+- How a user enters a template: picking a domain, choosing a template, connecting data, then customizing.
+- Which components are shared vs. domain-specific.

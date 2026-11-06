@@ -1,0 +1,97 @@
+/* `isolation` keeps the basemap (z-index -1) above this background. */
+.root {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-background);
+}
+
+.card {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
+  width: 260px;
+  padding: 10px 12px;
+  border: 1px solid var(--atlas-card-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-card);
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xs);
+  line-height: 1.45;
+  pointer-events: none;
+}
+
+.cardDate {
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
+.row {
+  margin-top: 8px;
+}
+
+.rowLabel {
+  font-size: var(--mantine-font-size-xxs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rowTitle {
+  font-weight: 600;
+}
+
+.rowSubtitle {
+  color: var(--atlas-textSecondary);
+}
+
+.note {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--atlas-border);
+  color: var(--atlas-textSecondary);
+}
+
+.controls {
+  position: absolute;
+  inset-inline: 12px;
+  inset-block-end: 20px;
+  padding: 8px 12px;
+  border: 1px solid var(--atlas-card-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-card);
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xs);
+}
+
+.status {
+  overflow: hidden;
+  margin: 0 0 6px;
+  color: var(--atlas-textSecondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status b {
+  font-weight: 600;
+}
+
+.controlRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clock {
+  min-width: 136px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.slider {
+  flex: 1;
+  min-width: 80px;
+}

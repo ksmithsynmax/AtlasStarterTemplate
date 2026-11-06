@@ -1,0 +1,96 @@
+/* `isolation` keeps the basemap (z-index -1) above this background. */
+.root {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-background);
+}
+
+.legend {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--atlas-card-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-card);
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xs);
+  list-style: none;
+  pointer-events: none;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  width: 240px;
+  padding: 12px;
+  border: 1px solid var(--atlas-card-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-card);
+}
+
+.detailHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.detailTitle {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
+.detailKind {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 400;
+}
+
+.properties {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--atlas-border);
+  font-size: var(--mantine-font-size-xs);
+}
+
+.properties div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.properties dt {
+  color: var(--atlas-textSecondary);
+}
+
+.properties dd {
+  margin: 0;
+  color: var(--atlas-text);
+  text-align: end;
+}

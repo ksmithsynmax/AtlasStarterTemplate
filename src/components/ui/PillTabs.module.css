@@ -27,4 +27,5 @@
 .label[data-active],
 .label[data-active]:hover {
   color: var(--atlas-card);
+  font-weight: 600;
 }

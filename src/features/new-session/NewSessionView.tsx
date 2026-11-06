@@ -2,7 +2,7 @@ import { Stack, Title } from '@mantine/core';
 import { Calendar, Send01 } from '@untitledui/icons';
 import { useState } from 'react';
 import { PillTabs, PromptInput, SuggestionAccordion } from '../../components/ui';
-import { domainFilters, domains, type DomainFilter } from './domains';
+import { domainFilters, domainSections, domains, type DomainFilter } from './domains';
 
 export interface NewSessionViewProps {
   onSubmit: (prompt: string) => void;
@@ -12,7 +12,13 @@ export interface NewSessionViewProps {
 export function NewSessionView({ onSubmit }: NewSessionViewProps) {
   const [prompt, setPrompt] = useState('');
   const [filter, setFilter] = useState<DomainFilter>('all');
-  const visible = filter === 'all' ? domains : domains.filter((domain) => domain.filter === filter);
+  const sections =
+    filter === 'all'
+      ? domainSections.map((section) => ({
+          ...section,
+          groups: domains.filter((domain) => domain.filter === section.filter),
+        }))
+      : [{ filter, title: undefined, groups: domains.filter((domain) => domain.filter === filter) }];
 
   return (
     <Stack align="center" gap={24} pt={80} pb={40}>
@@ -34,7 +40,14 @@ export function NewSessionView({ onSubmit }: NewSessionViewProps) {
       <PillTabs value={filter} onChange={setFilter} options={domainFilters} />
 
       <Stack w="100%" maw={560} gap={0}>
-        <SuggestionAccordion groups={visible} onPick={setPrompt} />
+        {sections.map((section) => (
+          <SuggestionAccordion
+            key={section.filter}
+            title={section.title}
+            groups={section.groups}
+            onPick={setPrompt}
+          />
+        ))}
       </Stack>
     </Stack>
   );

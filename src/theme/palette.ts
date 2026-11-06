@@ -101,6 +101,11 @@ export const atlasVar = (token: AtlasToken | AtlasDerivedToken) => `var(--atlas-
 export const cssMix = (a: string, percent: number, b: string) =>
   `color-mix(in srgb, ${a} ${percent}%, ${b})`;
 
+/** Soft wash of a palette color, as used by `light` buttons and tinted icon tiles. */
+export const ATLAS_TINT_MIX = 14;
+
+export const atlasTint = (token: AtlasToken) => cssMix(atlasVar(token), ATLAS_TINT_MIX, 'transparent');
+
 /**
  * Chart color for a 0-based series index, as a CSS value that follows the
  * active color scheme. Callers should group anything past

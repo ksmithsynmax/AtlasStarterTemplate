@@ -24,6 +24,9 @@ export function ProfileMenu({ position = 'right-end' }: { position?: FloatingPos
             {section.label}
           </Menu.Item>
         ))}
+        <Menu.Divider />
+        <Menu.Label>Prototyping</Menu.Label>
+        <Menu.Item onClick={() => navigate('/lab')}>Component Lab</Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );
