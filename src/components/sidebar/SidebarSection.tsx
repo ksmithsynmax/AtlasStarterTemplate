@@ -18,7 +18,7 @@ export function SidebarSection({ title, defaultOpened = true, children }: Sideba
       <UnstyledButton className={classes.sectionHeader} onClick={toggle} aria-expanded={opened}>
         {title}
         <AccordionChevron
-          size={12}
+          size={14}
           className={classes.chevron}
           style={{ transform: opened ? undefined : 'rotate(-90deg)' }}
         />

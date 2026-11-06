@@ -1,0 +1,35 @@
+/* 9px hit area centered on the panel's 1px right border. */
+.handle {
+  position: absolute;
+  z-index: 2;
+  inset-block: 0;
+  inset-inline-end: -5px;
+  width: 9px;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.handle::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 3px;
+  width: 3px;
+  background-color: transparent;
+  content: '';
+  transition: background-color 120ms ease;
+}
+
+.handle:hover::after,
+.handle:focus-visible::after,
+:global(html[data-resizing]) .handle::after {
+  background-color: var(--atlas-primary);
+}
+
+.handle:focus-visible {
+  outline: none;
+}
+
+:global(html[data-resizing]) {
+  cursor: col-resize;
+  user-select: none;
+}

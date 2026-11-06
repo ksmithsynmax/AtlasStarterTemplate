@@ -4,9 +4,14 @@
   height: calc(100dvh - var(--app-shell-header-height, 0px));
 }
 
-.chat {
+.chatDock {
+  position: relative;
   flex-shrink: 0;
-  width: 420px;
+  height: 100%;
+}
+
+.chat {
+  width: 100%;
 }
 
 .chatRail {
@@ -25,29 +30,4 @@
   color: var(--atlas-textSecondary);
   font-size: var(--mantine-font-size-sm);
   text-align: center;
-}
-
-.textCard h3 {
-  margin: 0 0 4px;
-  color: var(--atlas-text);
-  font-size: var(--mantine-font-size-sm);
-  font-weight: 600;
-}
-
-.textCard p {
-  margin: 0;
-  color: var(--atlas-textSecondary);
-  font-size: var(--mantine-font-size-xs);
-  line-height: 1.5;
-}
-
-.kpi {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: var(--atlas-text);
-  font-size: var(--mantine-font-size-xl);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
 }
