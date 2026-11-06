@@ -32,6 +32,13 @@
   gap: 8px;
 }
 
+.kindIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .detail {
   position: absolute;
   inset-block-start: 12px;

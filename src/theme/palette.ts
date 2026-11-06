@@ -27,8 +27,8 @@ export const atlasPalette: Record<AtlasScheme, Record<AtlasToken, string>> = {
     secondary: '#9057D5',
     accent1: '#FA4A95',
     accent2: '#EB6330',
-    accent3: '#4865F8',
-    success: '#06A96E',
+    accent3: '#006CD7',
+    success: '#1C8522',
     warning: '#C78802',
     error: '#E5484D',
     text: '#0A0E19',
@@ -41,8 +41,8 @@ export const atlasPalette: Record<AtlasScheme, Record<AtlasToken, string>> = {
     secondary: '#9057D5',
     accent1: '#FA4A95',
     accent2: '#EB6330',
-    accent3: '#4865F8',
-    success: '#07C881',
+    accent3: '#2994FF',
+    success: '#25A72C',
     warning: '#F5B800',
     error: '#E5484D',
     text: '#F5F7FA',
@@ -112,7 +112,13 @@ export const atlasTint = (token: AtlasToken) => cssMix(atlasVar(token), ATLAS_TI
  * `ATLAS_MAX_SERIES` into a single "Other" series.
  */
 export function atlasSeriesColor(index: number): string {
-  const token = atlasSeriesTokens[index % atlasSeriesTokens.length];
+  const base = atlasSeriesVar(index % atlasSeriesTokens.length);
   const textMix = atlasSeriesTextMix[Math.min(Math.floor(index / atlasSeriesTokens.length), 2)];
-  return textMix === 0 ? atlasVar(token) : cssMix(atlasVar('text'), textMix, atlasVar(token));
+  return textMix === 0 ? base : cssMix(atlasVar('text'), textMix, base);
 }
+
+/**
+ * CSS variable for base series 1–7 (0-based `slot`). They default to `atlasSeriesTokens`;
+ * a domain dashboard swaps its accent into series 1 (see `primaryAccentVars`).
+ */
+export const atlasSeriesVar = (slot: number) => `var(--atlas-series-${slot + 1})`;

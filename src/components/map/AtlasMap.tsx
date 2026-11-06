@@ -8,6 +8,7 @@ import { Map } from 'react-map-gl/maplibre';
 import { atlasPalette, hexToRgb, type AtlasToken } from '../../theme';
 import { IconButton, StatusDot } from '../ui';
 import classes from './AtlasMap.module.css';
+import { productIconLayers } from './icons';
 import type { MapFeature, MapFeatureKind, MapViewState } from './types';
 
 /** Free CARTO vector basemaps; swap for an Atlas-styled basemap once production's provider is confirmed. */
@@ -15,6 +16,14 @@ const BASEMAP = {
   dark: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
   light: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
 };
+
+const ICON_LAYER = 'feature-icons';
+
+/** The kind's icon at legend size, or its colored dot. */
+function KindSymbol({ kind, dotSize }: { kind: MapFeatureKind; dotSize?: number }) {
+  if (!kind.icon) return <StatusDot color={kind.color} size={dotSize} />;
+  return <img className={classes.kindIcon} src={kind.icon.default.url} alt="" />;
+}
 
 export interface AtlasMapProps {
   features: MapFeature[];
@@ -39,12 +48,23 @@ export function AtlasMap({ features, kinds, initialViewState, height = 560, onSe
     onSelect?.(feature);
   };
 
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const dotFeatures = useMemo(() => features.filter((feature) => !kinds[feature.kind]?.icon), [features, kinds]);
+  const iconFeatures = useMemo(
+    () =>
+      features.flatMap((feature) => {
+        const icon = kinds[feature.kind]?.icon;
+        return icon ? [{ ...feature, icon }] : [];
+      }),
+    [features, kinds],
+  );
+
   const layers = useMemo(() => {
     const rgb = (token: AtlasToken) => hexToRgb(palette[token]);
     return [
       new ScatterplotLayer<MapFeature>({
         id: 'features',
-        data: features,
+        data: dotFeatures,
         pickable: true,
         radiusUnits: 'pixels',
         getPosition: (feature) => feature.position,
@@ -58,8 +78,13 @@ export function AtlasMap({ features, kinds, initialViewState, height = 560, onSe
         highlightColor: [...rgb('text'), 90],
         updateTriggers: { getRadius: selected?.id, getLineWidth: selected?.id, getLineColor: [selected?.id, scheme] },
       }),
+      ...productIconLayers(
+        ICON_LAYER,
+        iconFeatures.map((feature) => (feature.id === selected?.id ? { ...feature, halo: true } : feature)),
+        { hoveredId, pickable: true, haloBackdrop: palette.card },
+      ),
     ];
-  }, [features, kinds, palette, scheme, selected]);
+  }, [dotFeatures, iconFeatures, kinds, palette, scheme, selected, hoveredId]);
 
   return (
     <div className={classes.root} style={{ height }}>
@@ -68,6 +93,10 @@ export function AtlasMap({ features, kinds, initialViewState, height = 560, onSe
         controller
         layers={layers}
         onClick={(info) => select((info.object as MapFeature | undefined) ?? null)}
+        onHover={({ object, layer }) => {
+          const id = layer?.id === ICON_LAYER ? ((object as MapFeature | undefined)?.id ?? null) : null;
+          if (id !== hoveredId) setHoveredId(id);
+        }}
         getCursor={({ isHovering, isDragging }) => (isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab')}
         getTooltip={({ object }) =>
           object && {
@@ -89,7 +118,7 @@ export function AtlasMap({ features, kinds, initialViewState, height = 560, onSe
       <ul className={classes.legend}>
         {Object.entries(kinds).map(([key, kind]) => (
           <li key={key}>
-            <StatusDot color={kind.color} />
+            <KindSymbol kind={kind} />
             {kind.label}
           </li>
         ))}
@@ -101,7 +130,11 @@ export function AtlasMap({ features, kinds, initialViewState, height = 560, onSe
             <div className={classes.detailTitle}>
               <span>{selected.name}</span>
               <span className={classes.detailKind}>
-                <StatusDot color={kinds[selected.kind]?.color ?? 'primary'} size={6} />
+                {kinds[selected.kind] ? (
+                  <KindSymbol kind={kinds[selected.kind]} dotSize={6} />
+                ) : (
+                  <StatusDot color="primary" size={6} />
+                )}
                 {kinds[selected.kind]?.label ?? selected.kind}
               </span>
             </div>

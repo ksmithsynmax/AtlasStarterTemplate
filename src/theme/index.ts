@@ -1,4 +1,4 @@
 export * from './color';
 export * from './palette';
 export * from './scale';
-export { cssVariablesResolver, theme } from './theme';
+export { cssVariablesResolver, primaryAccentVars, theme } from './theme';

@@ -1,0 +1,483 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background-color: var(--atlas-card);
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xs);
+  line-height: 1.45;
+}
+
+.header {
+  padding: 16px 12px 0;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.badge {
+  flex-shrink: 0;
+  font-size: var(--mantine-font-size-lg);
+  line-height: 1;
+  cursor: default;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  overflow: hidden;
+  font-size: var(--mantine-font-size-md);
+  font-weight: 600;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag {
+  margin-inline-start: auto;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--tag-color) 40%, transparent);
+  color: var(--tag-color);
+  font-size: var(--mantine-font-size-xxs);
+  white-space: nowrap;
+}
+
+.tag + .tag {
+  margin-inline-start: 0;
+}
+
+.export {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.titleRow:not(:has(.tag)) .export {
+  margin-inline-start: auto;
+}
+
+.subtitle {
+  overflow: hidden;
+  color: var(--atlas-textSecondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.callout {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.calloutValue {
+  font-size: var(--mantine-font-size-lg);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.calloutLabel {
+  color: var(--atlas-textSecondary);
+}
+
+.figure {
+  margin: 0 0 10px;
+}
+
+/* Chips are square with the vessel centred, so a wide crop keeps it in view. */
+.hero {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+  object-fit: cover;
+  border-radius: var(--mantine-radius-sm);
+  background-color: var(--atlas-background);
+}
+
+.heroButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.enlarge {
+  position: absolute;
+  inset-block-start: 6px;
+  inset-inline-end: 6px;
+  display: flex;
+  padding: 4px;
+  border-radius: var(--mantine-radius-sm);
+  background-color: color-mix(in srgb, var(--atlas-card) 80%, transparent);
+  color: var(--atlas-text);
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.heroButton:hover .enlarge,
+.heroButton:focus-visible .enlarge {
+  opacity: 1;
+}
+
+.caption {
+  margin-top: 4px;
+  color: var(--atlas-textSecondary);
+}
+
+.noImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 12px;
+  aspect-ratio: 5 / 2;
+  border: 1px dashed var(--atlas-border);
+  border-radius: var(--mantine-radius-sm);
+  color: var(--atlas-textSecondary);
+  text-align: center;
+}
+
+.row {
+  margin-top: 6px;
+}
+
+.rowLabel {
+  font-size: var(--mantine-font-size-xxs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rowTitle {
+  font-weight: 600;
+}
+
+.rowSubtitle {
+  color: var(--atlas-textSecondary);
+}
+
+.note {
+  margin-top: 8px;
+  color: var(--atlas-textSecondary);
+}
+
+.timelineLabel {
+  padding: 16px 12px 4px;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xxs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.filters {
+  padding: 4px 12px;
+}
+
+.timeline {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 0;
+  padding: 4px 12px 12px;
+  overflow-y: auto;
+}
+
+.chapter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Dims the header and rail only; stop images keep full opacity. */
+.chapter[data-future] > .railRow:first-child {
+  opacity: 0.55;
+}
+
+.chapterHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--atlas-card-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: color-mix(in srgb, var(--atlas-text) 4%, var(--atlas-card));
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.chapterHeader:hover {
+  border-color: var(--atlas-border);
+  background-color: color-mix(in srgb, var(--atlas-text) 8%, var(--atlas-card));
+}
+
+.chapterTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+}
+
+.chapterCount {
+  margin-inline-start: auto;
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xxs);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.chapterSummary {
+  padding-inline-start: 22px;
+  color: var(--atlas-textSecondary);
+}
+
+.chapterIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.chapterDot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-inline: 4px;
+  border-radius: 50%;
+  background-color: var(--chapter-color);
+}
+
+.stops,
+.chapterStops {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* No padding, so every card is the rail's 6px gap from the next. */
+.chapterStops {
+  padding-bottom: 0;
+}
+
+/* Progress rail: cards sit in the second column; the rail's line runs from this card's square to the next one's. */
+.railRow {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  column-gap: 8px;
+}
+
+.rail {
+  --rail-node-top: 12px;
+  --rail-gap: 6px;
+
+  position: relative;
+}
+
+.rail::before,
+.rail::after {
+  position: absolute;
+  inset-block: calc(var(--rail-node-top) + 5px) calc(-1 * (var(--rail-gap) + var(--rail-node-top)));
+  inset-inline-start: 5px;
+  width: 2px;
+  content: "";
+}
+
+/* Unreached: dotted. */
+.rail::before {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--atlas-text) 50%, transparent) 0 2px,
+    transparent 2px 5px
+  );
+}
+
+/* Reached: fills down from the top as the clock moves. */
+.rail::after {
+  background-color: var(--rail-color);
+  transform: scaleY(var(--rail-fill));
+  transform-origin: top;
+  transition: transform 300ms ease-out;
+}
+
+.rail[data-last]::before,
+.rail[data-last]::after {
+  display: none;
+}
+
+.railNode {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: var(--rail-node-top);
+  inset-inline-start: 1px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid color-mix(in srgb, var(--atlas-text) 70%, transparent);
+  border-radius: 50%;
+  background-color: var(--atlas-card);
+  transition:
+    background-color 300ms ease-out,
+    border-color 300ms ease-out;
+}
+
+.rail[data-large] .railNode {
+  inset-block-start: calc(var(--rail-node-top) - 1px);
+  inset-inline-start: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.rail[data-reached] .railNode {
+  border-color: var(--rail-color);
+  background-color: var(--rail-color);
+}
+
+/* Like the SynMax mark's signal: the circle the clock just reached sends out two rings, then holds. */
+.rail[data-latest] .railNode {
+  animation: rail-signal 900ms ease-out 2;
+}
+
+@keyframes rail-signal {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--rail-color) 80%, transparent);
+  }
+
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail::after,
+  .railNode {
+    transition: none;
+  }
+
+  .rail[data-latest] .railNode {
+    animation: none;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--atlas-card-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: color-mix(in srgb, var(--atlas-text) 4%, var(--atlas-card));
+}
+
+.itemHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item:hover,
+.item[data-highlighted] {
+  background-color: color-mix(in srgb, var(--atlas-text) 8%, var(--atlas-card));
+}
+
+/* Matches the map's halo on the current stop. */
+.item[data-current] {
+  border-color: var(--playback-accent, var(--atlas-text));
+  background-color: color-mix(in srgb, var(--playback-accent, var(--atlas-text)) 12%, var(--atlas-card));
+}
+
+/* Future stops dim their text and icon, never their image. */
+.item[data-future] .itemText {
+  opacity: 0.55;
+}
+
+.itemText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.itemTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  color: var(--atlas-text);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemDate {
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xxs);
+}
+
+.eventIcon {
+  flex-shrink: 0;
+  height: 16px;
+}
+
+.eventDot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--stop-color);
+}
+
+.thumb {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: var(--mantine-radius-sm);
+  background-color: var(--atlas-background);
+  color: var(--atlas-textSecondary);
+}

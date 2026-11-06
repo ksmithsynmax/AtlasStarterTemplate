@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { DAY_MS } from './track';
 
+const EASE_MS = 500;
+const MIN_EASE_RATE = 0.2;
+
 export interface PlaybackClockOptions {
   start: number;
   end: number;
@@ -32,8 +35,14 @@ export function usePlaybackClock({ start, end, stops, holdMs = 2500 }: PlaybackC
         c.hold -= dt;
         if (c.hold <= 0) setActiveStop(null);
       } else {
-        const nextT = c.t + (dt * speed * DAY_MS) / 1000;
         const stop = stops[c.next];
+        let rate = (speed * DAY_MS) / 1000;
+        // Slows into each stop over its last EASE_MS of real time, so the pause doesn't land abruptly.
+        if (stop) {
+          const remaining = (stop.t - c.t) / rate;
+          if (remaining < EASE_MS) rate *= Math.max(MIN_EASE_RATE, remaining / EASE_MS);
+        }
+        const nextT = c.t + dt * rate;
         if (stop && nextT >= stop.t) {
           c.t = stop.t;
           c.hold = holdMs;
@@ -90,5 +99,5 @@ export function usePlaybackClock({ start, end, stops, holdMs = 2500 }: PlaybackC
     seek(start);
   };
 
-  return { t, playing, speed, activeStop, setSpeed, seek, toggle, next, previous, reset };
+  return { t, playing, speed, activeStop, setSpeed, seek, goTo: arrive, toggle, next, previous, reset };
 }

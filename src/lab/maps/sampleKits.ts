@@ -1,5 +1,6 @@
 import type { MapFeature, MapFeatureKind, MapViewState } from '../../components/map';
 import type { AtlasProduct } from '../products';
+import { theiaIcons } from './theiaIcons';
 
 export interface MapKit {
   kinds: Record<string, MapFeatureKind>;
@@ -48,15 +49,16 @@ export const sampleMapKits: Record<AtlasProduct, MapKit> = {
   theia: {
     initialViewState: WORLD_VIEW,
     kinds: {
-      detection: { label: 'Satellite detection', color: 'primary' },
-      dark: { label: 'AIS dark event', color: 'warning', radius: 6 },
-      sts: { label: 'Possible STS transfer', color: 'accent2', radius: 7 },
+      detection: { label: 'Satellite detection', color: 'primary', icon: theiaIcons.light },
+      dark: { label: 'AIS dark event', color: 'warning', icon: theiaIcons.dark },
+      sts: { label: 'Possible STS transfer', color: 'accent2', icon: theiaIcons.sts },
     },
     features: [
       ...scatter(11, 60, HORMUZ, (index, random) => ({
         id: `det-${index}`,
         kind: 'detection',
         name: `Detection ${4300 + index}`,
+        heading: random() * 360,
         properties: {
           Type: pick(['Tanker', 'Cargo', 'Tug', 'Unclassified'], random),
           Length: `${Math.round(60 + random() * 260)} m`,
@@ -67,6 +69,7 @@ export const sampleMapKits: Record<AtlasProduct, MapKit> = {
         id: `dark-${index}`,
         kind: 'dark',
         name: `Dark event ${900 + index}`,
+        heading: random() * 360,
         properties: { 'Hours dark': (random() * 60).toFixed(1), 'Last AIS': pick(['Tanker', 'Cargo'], random) },
       })),
       ...scatter(37, 5, HORMUZ, (index) => ({

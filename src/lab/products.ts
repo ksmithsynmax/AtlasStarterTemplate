@@ -1,3 +1,5 @@
+import type { AtlasToken } from '../theme';
+
 export type AtlasDomain = 'maritime' | 'energy';
 
 export type AtlasProduct = 'theia' | 'hyperion' | 'vulcan' | 'basiniq';
@@ -13,3 +15,9 @@ export const productById = Object.fromEntries(atlasProducts.map((product) => [pr
   AtlasProduct,
   (typeof atlasProducts)[number]
 >;
+
+/** Each domain's accent, used for its dashboards' controls and its product tags. */
+export const domainAccent: Record<AtlasDomain, AtlasToken> = {
+  maritime: 'accent3',
+  energy: 'success',
+};

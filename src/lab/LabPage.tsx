@@ -1,10 +1,11 @@
 import { Card } from '@mantine/core';
 import { useState } from 'react';
 import { FilterPills } from '../components/ui';
-import { ATLAS_RADIUS_FULL } from '../theme';
+import { primaryAccentVars } from '../theme';
+import { useDashboardAccent } from './dashboardTheme';
 import { labExperiments } from './experiments';
 import classes from './LabPage.module.css';
-import { atlasProducts, productById, type AtlasProduct } from './products';
+import { atlasProducts, type AtlasProduct } from './products';
 
 type Filter = 'all' | AtlasProduct;
 
@@ -16,6 +17,7 @@ const FILTERS: { value: Filter; label: string }[] = [
 /** Scratch area for dashboard components under test before they go into templates. */
 export function LabPage() {
   const [filter, setFilter] = useState<Filter>('all');
+  const dashboardAccent = useDashboardAccent();
   const visible =
     filter === 'all'
       ? labExperiments
@@ -39,22 +41,11 @@ export function LabPage() {
             <Card key={experiment.id} padding={0} className={classes.card} data-wide={experiment.wide || undefined}>
               <div className={classes.cardHeader}>
                 <h2 className={classes.cardTitle}>{experiment.title}</h2>
-                {(experiment.products ?? [undefined]).map((id) => (
-                  <span
-                    key={id ?? 'all'}
-                    className={classes.tag}
-                    data-domain={id ? productById[id].domain : undefined}
-                    style={{ borderRadius: ATLAS_RADIUS_FULL }}
-                  >
-                    {id ? productById[id].label : 'All products'}
-                  </span>
-                ))}
-                <span className={classes.status} data-status={experiment.status}>
-                  {experiment.status === 'ready' ? 'Ready' : 'Exploring'}
-                </span>
               </div>
               <p className={classes.description}>{experiment.description}</p>
-              <div className={classes.stage}>{experiment.render()}</div>
+              <div className={classes.stage} style={dashboardAccent && primaryAccentVars(dashboardAccent)}>
+                {experiment.render()}
+              </div>
             </Card>
           ))}
         </div>

@@ -6,13 +6,15 @@ export interface FilterPillsProps<T extends string> {
   value: T;
   onChange: (value: T) => void;
   options: { value: T; label: string }[];
+  /** `xs` for tight spaces such as side panels. */
+  size?: 'sm' | 'xs';
   'aria-label'?: string;
 }
 
 /** Quiet pill filters, e.g. All / Session / Project. The active pill gets an outlined hover fill. */
-export function FilterPills<T extends string>({ value, onChange, options, ...props }: FilterPillsProps<T>) {
+export function FilterPills<T extends string>({ value, onChange, options, size = 'sm', ...props }: FilterPillsProps<T>) {
   return (
-    <div className={classes.root} role="radiogroup" aria-label={props['aria-label']}>
+    <div className={classes.root} role="radiogroup" aria-label={props['aria-label']} data-size={size}>
       {options.map((option) => (
         <UnstyledButton
           key={option.value}

@@ -40,10 +40,22 @@
   grid-column: 1 / -1;
 }
 
+/* Wide components sit straight on the page, under their title. */
+.card[data-wide] {
+  border: 0;
+  background-color: transparent;
+}
+
+.card[data-wide] .cardHeader,
+.card[data-wide] .description {
+  padding-inline: 0;
+}
+
 .card[data-wide] .stage {
+  margin: 16px 0 0;
   padding: 0;
-  border-style: solid;
-  border-color: var(--atlas-card-border);
+  border: 0;
+  background-color: transparent;
 }
 
 .cardHeader {
@@ -60,30 +72,6 @@
   color: var(--atlas-text);
   font-size: var(--mantine-font-size-md);
   font-weight: 600;
-}
-
-.tag {
-  padding: 2px 8px;
-  border: 1px solid var(--atlas-border);
-  color: var(--atlas-textSecondary);
-  font-size: var(--mantine-font-size-xs);
-}
-
-.tag[data-domain='maritime'] {
-  color: var(--atlas-accent3);
-}
-
-.tag[data-domain='energy'] {
-  color: var(--atlas-success);
-}
-
-.status {
-  color: var(--atlas-textSecondary);
-  font-size: var(--mantine-font-size-xs);
-}
-
-.status[data-status='ready'] {
-  color: var(--atlas-primary);
 }
 
 .description {

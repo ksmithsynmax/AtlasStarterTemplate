@@ -11,11 +11,13 @@ import {
   type MantineColorsTuple,
   type VariantColorsResolver,
 } from '@mantine/core';
+import type { CSSProperties } from 'react';
 import { mixHex } from './color';
 import {
   ATLAS_TINT_MIX,
   atlasDerivedMix,
   atlasPalette,
+  atlasSeriesTokens,
   atlasTokenOrder,
   atlasVar,
   cssMix,
@@ -140,6 +142,9 @@ function schemeVariables(scheme: typeof light, overrides: Record<string, string>
     ...Object.fromEntries(
       Object.entries(atlasDerivedMix).map(([token, mix]) => [`--atlas-${token}`, cssMix(scheme.text, mix, 'transparent')]),
     ),
+    ...Object.fromEntries(atlasSeriesTokens.map((token, slot) => [`--atlas-series-${slot + 1}`, scheme[token]])),
+    // Atlas teal, kept where a dashboard makes its domain accent the primary.
+    '--atlas-brand': scheme.primary,
     ...overrides,
 
     '--atlas-primary-hover': cssMix(scheme.text, FILLED_HOVER_MIX, scheme.primary),
@@ -157,6 +162,41 @@ function schemeVariables(scheme: typeof light, overrides: Record<string, string>
     '--mantine-color-default-hover': mixHex(scheme.text, 6, scheme.card),
     '--mantine-color-default-border': mixHex(scheme.text, 10, scheme.card),
   };
+}
+
+const MANTINE_COLOR_SUFFIXES = [
+  ...Array.from({ length: 10 }, (_, shade) => String(shade)),
+  'filled',
+  'filled-hover',
+  'light',
+  'light-hover',
+  'light-color',
+  'outline',
+  'outline-hover',
+  'text',
+];
+
+/**
+ * Inline style that makes `token` the primary color for everything inside an
+ * element: Atlas primary, Mantine's default component color and its variants.
+ * Portaled dropdowns render outside the element and keep the Atlas primary.
+ * Chart series 1 becomes `token` too, and teal takes `token`'s old series slot,
+ * so every series stays distinct.
+ */
+export function primaryAccentVars(token: AtlasToken): CSSProperties {
+  const vars: Record<string, string> = {
+    '--atlas-primary': atlasVar(token),
+    '--atlas-primary-hover': cssMix(atlasVar('text'), FILLED_HOVER_MIX, atlasVar(token)),
+    '--mantine-color-anchor': atlasVar(token),
+    '--atlas-series-1': atlasVar(token),
+  };
+  const slot = (atlasSeriesTokens as readonly AtlasToken[]).indexOf(token);
+  if (slot > 0) vars[`--atlas-series-${slot + 1}`] = 'var(--atlas-brand)';
+  for (const suffix of MANTINE_COLOR_SUFFIXES) {
+    vars[`--mantine-color-primary-${suffix}`] = `var(--mantine-color-${token}-${suffix})`;
+    vars[`--mantine-primary-color-${suffix}`] = `var(--mantine-color-${token}-${suffix})`;
+  }
+  return vars as CSSProperties;
 }
 
 export const cssVariablesResolver: CSSVariablesResolver = () => ({

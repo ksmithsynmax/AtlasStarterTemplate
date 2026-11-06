@@ -57,8 +57,29 @@ export function trackRuns(track: TrackPoint[], gaps: TrackGap[], until?: TrackPo
   return runs;
 }
 
+/** Longitude in ±180, which deck.gl needs to draw a point on every world copy. */
+export const wrapLon = (lon: number) => ((((lon + 180) % 360) + 360) % 360) - 180;
+
 /** Shifts `lon` by whole turns so it sits nearest `reference`. */
 export const nearestLon = (lon: number, reference: number) => lon + 360 * Math.round((reference - lon) / 360);
+
+/** Bearing in degrees clockwise from north, from one point toward another. */
+export function bearing(lat1: number, lon1: number, lat2: number, lon2: number) {
+  const r = Math.PI / 180;
+  const y = Math.sin((lon2 - lon1) * r) * Math.cos(lat2 * r);
+  const x = Math.cos(lat1 * r) * Math.sin(lat2 * r) - Math.sin(lat1 * r) * Math.cos(lat2 * r) * Math.cos((lon2 - lon1) * r);
+  return (Math.atan2(y, x) / r + 360) % 360;
+}
+
+/** Course over ground at a track index, skipping points where the vessel didn't move. */
+export function courseAt(track: TrackPoint[], index: number) {
+  const here = track[index];
+  const moved = (point: TrackPoint) => point.lon !== here.lon || point.lat !== here.lat;
+  const next = track.slice(index + 1).find(moved);
+  if (next) return bearing(here.lat, here.lon, next.lat, next.lon);
+  const previous = track.slice(0, index).findLast(moved);
+  return previous ? bearing(previous.lat, previous.lon, here.lat, here.lon) : 0;
+}
 
 /** Great-circle distance in km. */
 export function distanceKm(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -79,6 +100,6 @@ export function formatUtc(t: number) {
 
 /** "21.67°N 114.94°E", wrapping the longitude back into ±180. */
 export function formatCoords(lat: number, lon: number) {
-  const wrapped = ((lon + 540) % 360) - 180;
+  const wrapped = wrapLon(lon);
   return `${Math.abs(lat).toFixed(2)}°${lat >= 0 ? 'N' : 'S'} ${Math.abs(wrapped).toFixed(2)}°${wrapped >= 0 ? 'E' : 'W'}`;
 }

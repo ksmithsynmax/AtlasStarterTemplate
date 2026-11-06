@@ -6,6 +6,7 @@ import { ChatPanel, type ChatMessageData } from '../../components/chat';
 import { DashboardPane } from '../../components/dashboard';
 import { ChatIcon, KebabIcon } from '../../components/icons';
 import { IconButton, ResizeHandle } from '../../components/ui';
+import { useDashboardAccent } from '../../lab/dashboardTheme';
 import { ATLAS_RADIUS_FULL } from '../../theme';
 import { fallbackConversation, sampleConversations } from './sampleConversations';
 import classes from './SessionView.module.css';
@@ -35,6 +36,7 @@ export function SessionView({ sessionId, title }: SessionViewProps) {
     () => sampleConversations[sessionId] ?? fallbackConversation(title),
   );
   const clipboard = useClipboard({ timeout: 1500 });
+  const dashboardAccent = useDashboardAccent();
 
   const send = (text: string) => {
     const time = timeNow();
@@ -91,6 +93,7 @@ export function SessionView({ sessionId, title }: SessionViewProps) {
       )}
 
       <DashboardPane
+        accent={dashboardAccent}
         actions={
           <>
             <IconButton label="Full screen" icon={<Maximize01 size={16} />} />

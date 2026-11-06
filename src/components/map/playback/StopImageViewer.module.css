@@ -1,0 +1,67 @@
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
+.icon {
+  height: 16px;
+}
+
+/* Chips are small (192 px), so they're shown square rather than stretched wide. */
+.image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  max-height: 55vh;
+  object-fit: cover;
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--atlas-background);
+}
+
+.details {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 0;
+  font-size: var(--mantine-font-size-xs);
+}
+
+.details dt {
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xxs);
+}
+
+.details dd {
+  margin: 0;
+  color: var(--atlas-text);
+  font-weight: 600;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.count {
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.goTo {
+  margin-inline-start: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--atlas-primary);
+  font: inherit;
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+}
