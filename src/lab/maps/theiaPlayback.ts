@@ -266,7 +266,8 @@ export async function loadTheiaPlayback(source: TheiaPlaybackSource, signal?: Ab
       lat: last.lat,
       lon: last.lon,
       name: isBerth(last.lat, last.lon) && berth ? berth.name : area(last.lat, last.lon),
-      source: `${t - last.t < DAY_MS ? 'Dark detection' : 'Last dark detection'} ${formatUtc(last.t)}`,
+      // Only worth saying when the sighting is older than the card's own detection.
+      source: t - last.t < DAY_MS ? undefined : `Last seen ${formatUtc(last.t)}`,
       detection: last,
     };
   };
@@ -295,8 +296,8 @@ export async function loadTheiaPlayback(source: TheiaPlaybackSource, signal?: Ab
       return {
         ...base,
         rows: [
-          { label: 'Claimed (AIS)', color: SPOOF_COLOR, ...claimed },
-          { label: 'Actual (satellite)', color: DARK_COLOR, title: 'No imagery detection' },
+          { label: 'Claimed (AIS)', icon: theiaIcons.spoofingShip, ...claimed },
+          { label: 'Actual (satellite)', icon: theiaIcons.dark, title: 'No satellite detection yet' },
         ],
       };
     }
@@ -309,10 +310,15 @@ export async function loadTheiaPlayback(source: TheiaPlaybackSource, signal?: Ab
     return {
       ...base,
       rows: [
-        { label: 'Claimed (AIS)', color: SPOOF_COLOR, ...claimed },
-        { label: 'Actual (satellite)', color: DARK_COLOR, title: actual.name, subtitle: `${formatCoords(actual.lat, actual.lon)} · ${actual.source}` },
+        { label: 'Claimed (AIS)', icon: theiaIcons.spoofingShip, ...claimed },
+        {
+          label: 'Actual (satellite)',
+          icon: theiaIcons.dark,
+          title: actual.name,
+          subtitle: [formatCoords(actual.lat, actual.lon), actual.source].filter(Boolean).join(' · '),
+        },
       ],
-      callout: { value: `${km} km`, label: 'from the AIS claim to where satellites see it', color: SPOOF_COLOR },
+      callout: { value: `${km} km`, label: 'apart' },
       companion: { lon: actual.lon, lat: actual.lat, color: DARK_COLOR, icon: theiaIcons.dark,
         heading: actual.detection?.heading,
         label: `Actual: ${actual.name}`, linkLabel: `${km} km apart` },

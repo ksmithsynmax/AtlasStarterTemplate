@@ -94,15 +94,21 @@ export interface PlaybackMarker {
 
 export interface PlaybackCardRow {
   label: string;
-  color: PlaybackColor;
+  /** Label color. Unused with `icon`, which marks the row instead. */
+  color?: PlaybackColor;
+  /** When every row has one, the rows read as linked places, e.g. claimed vs. actual position. */
+  icon?: MapIconSet;
   title: string;
   subtitle?: string;
 }
 
 /** What the position card and map annotations show at one moment. */
 export interface PlaybackFrame {
-  /** The number that matters most right now, shown large, e.g. how far a spoofed position is off. */
-  callout?: { value: string; label: string; color: PlaybackColor };
+  /**
+   * The number that matters most right now, shown large, e.g. how far a spoofed position is off.
+   * With linked rows it sits on the link between the first two.
+   */
+  callout?: { value: string; label: string; color?: PlaybackColor };
   rows: PlaybackCardRow[];
   note?: string;
   /** Second position joined to the vessel by a dashed line, e.g. where satellites actually saw it. */

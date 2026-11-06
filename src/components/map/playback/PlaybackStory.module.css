@@ -176,6 +176,49 @@
   color: var(--atlas-textSecondary);
 }
 
+/* Linked places, e.g. claimed vs. actual position: icons joined by a dotted line, like the map. */
+.places {
+  display: flex;
+  flex-direction: column;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.place,
+.link {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: 10px;
+}
+
+.placeIcon {
+  justify-self: center;
+  height: 16px;
+  margin-top: 1px;
+}
+
+.placeLabel {
+  color: var(--atlas-textSecondary);
+  font-size: var(--mantine-font-size-xxs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.link {
+  align-items: center;
+  min-height: 24px;
+  padding-block: 6px;
+}
+
+.link::before {
+  justify-self: center;
+  align-self: stretch;
+  border-inline-start: 2px dotted color-mix(in srgb, var(--atlas-text) 40%, transparent);
+  content: "";
+}
+
 .note {
   margin-top: 8px;
   color: var(--atlas-textSecondary);

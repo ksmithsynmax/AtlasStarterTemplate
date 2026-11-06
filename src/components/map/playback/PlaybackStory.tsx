@@ -1,6 +1,6 @@
 import { Tooltip } from "@mantine/core";
 import { Download01, Expand01, Image01 } from "@untitledui/icons";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { ATLAS_RADIUS_FULL, atlasVar } from "../../../theme";
 import { FilterPills, IconButton } from "../../ui";
 import { printBriefing } from "./briefing";
@@ -70,6 +70,8 @@ export function PlaybackStory({
   const shown = current === null ? null : stops[current];
 
   // The current stop's card opens to show its image and the live moment, in place of a separate panel.
+  const linkedRows =
+    !!frame && frame.rows.length > 1 && frame.rows.every((row) => row.icon);
   const details = shown && frame && (
     <div className={classes.details} aria-live="polite">
       {shown.image ? (
@@ -101,29 +103,65 @@ export function PlaybackStory({
           </div>
         )
       )}
-      {frame.callout && (
-        <div
-          className={classes.callout}
-          style={{ color: playbackCss(frame.callout.color) }}
-        >
-          <span className={classes.calloutValue}>{frame.callout.value}</span>
-          <span className={classes.calloutLabel}>{frame.callout.label}</span>
-        </div>
-      )}
-      {frame.rows.map((row) => (
-        <div key={row.label} className={classes.row}>
-          <div
-            className={classes.rowLabel}
-            style={{ color: playbackCss(row.color) }}
-          >
-            {row.label}
-          </div>
-          <div className={classes.rowTitle}>{row.title}</div>
-          {row.subtitle && (
-            <div className={classes.rowSubtitle}>{row.subtitle}</div>
+      {linkedRows ? (
+        <ol className={classes.places}>
+          {frame.rows.map((row, index) => (
+            <Fragment key={row.label}>
+              {index > 0 && (
+                <li className={classes.link}>
+                  {index === 1 && frame.callout && (
+                    <span>
+                      <span
+                        className={classes.calloutValue}
+                        style={{ color: playbackCss(frame.callout.color ?? "text") }}
+                      >
+                        {frame.callout.value}
+                      </span>{" "}
+                      <span className={classes.calloutLabel}>{frame.callout.label}</span>
+                    </span>
+                  )}
+                </li>
+              )}
+              <li className={classes.place}>
+                <img className={classes.placeIcon} src={row.icon!.default.url} alt="" />
+                <div>
+                  <div className={classes.placeLabel}>{row.label}</div>
+                  <div className={classes.rowTitle}>{row.title}</div>
+                  {row.subtitle && (
+                    <div className={classes.rowSubtitle}>{row.subtitle}</div>
+                  )}
+                </div>
+              </li>
+            </Fragment>
+          ))}
+        </ol>
+      ) : (
+        <>
+          {frame.callout && (
+            <div
+              className={classes.callout}
+              style={{ color: playbackCss(frame.callout.color ?? "text") }}
+            >
+              <span className={classes.calloutValue}>{frame.callout.value}</span>
+              <span className={classes.calloutLabel}>{frame.callout.label}</span>
+            </div>
           )}
-        </div>
-      ))}
+          {frame.rows.map((row) => (
+            <div key={row.label} className={classes.row}>
+              <div
+                className={classes.rowLabel}
+                style={{ color: playbackCss(row.color ?? "textSecondary") }}
+              >
+                {row.label}
+              </div>
+              <div className={classes.rowTitle}>{row.title}</div>
+              {row.subtitle && (
+                <div className={classes.rowSubtitle}>{row.subtitle}</div>
+              )}
+            </div>
+          ))}
+        </>
+      )}
       {frame.note && <div className={classes.note}>{frame.note}</div>}
     </div>
   );
